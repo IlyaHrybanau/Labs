@@ -1,0 +1,32 @@
+#include <iostream> //cout
+using namespace std;
+
+int main () {
+    int A[20], n;
+    int i;
+    cout << "введите размер массива"
+    <<endl;
+    cin >> n;
+    cout << "введите элементы массива"
+    <<endl;
+    for (i=0; i<n; i++)
+    cin >> A[i];
+
+    cout<<"Нечётные"<<endl;
+    for (i=0; i<n; i++)
+    if (i%2==0){
+    cout<<A[i]<<endl;
+    }
+    else {
+    continue;
+    }
+    cout<<"Чётные"<<endl;
+    for (i=0; i<n; i++)
+    if (i%2!=0){
+    cout<<A[i]<<endl;
+    }
+    else {
+    continue;
+    }
+    return 0;
+}
