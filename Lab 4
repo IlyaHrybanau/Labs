@@ -1,0 +1,36 @@
+Ex. 4
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+    double start = -2 * M_PI;
+    double end = 2 * M_PI;
+    double step = M_PI / 12;
+    
+    cout << "x\t|\ty" << endl;
+    cout << "----------------" << endl;
+    
+    for (double x = start; x <= end + 1e-9; x += step) {
+        double y;
+        
+        if (x <= 0) {
+            y = tan(x / 2);
+        }
+        else if (x <= M_PI / 2) {
+            y = sin(x - M_PI / 4);
+        }
+        else {
+            y = cos(2 * x);
+        }
+        
+        cout << x << "\t|\t" << y << endl;
+    }
+    
+    return 0;
+}
+
+
+
+
