@@ -60,3 +60,19 @@ int main() {
 
 
 
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a;
+    cin >> a;
+    
+    int result = 1;
+    for (int i = 1; i <= 15; i++) {
+        result *= i;
+    }
+    
+    cout << result << endl;
+    return 0;
+}
+
