@@ -1,0 +1,19 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    double x_min = 1.0;
+    double x_max = 3.0;
+    double h = 0.2;
+
+    cout << "x\t|\ty" << endl;
+    cout << "----------------" << endl;
+
+    for (double x = x_min; x <= x_max + 1e-9; x += h) {
+        double y = x*x*x - 4*x*x + 2;
+        cout << x << "\t|\t" << y << endl;
+    }
+
+    return 0;
+}
