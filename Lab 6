@@ -1,5 +1,5 @@
 Ex.1
-#include <iostream> //cout
+#include <iostream>
 using namespace std;
 
 int main () {
@@ -34,7 +34,7 @@ int main () {
 
 
 Ex.2
-#include <iostream> //cout
+#include <iostream>
 using namespace std;
 
 int main () {
