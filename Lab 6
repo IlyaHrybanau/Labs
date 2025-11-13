@@ -66,3 +66,31 @@ int main () {
     }
     return 0;
 }
+
+
+#Ex. 3
+#include <iostream>
+using namespace std;
+
+int main () {
+    int A[20], n;
+    int i;
+    int min_cost=0;
+    cout << "Введите количество видов конфет"
+    <<endl;
+    cin >> n;
+    cout << "Введите стоимость конфет"
+    <<endl;
+    for (i=0; i<n; i++)
+    cin >> A[i];
+
+    cout<<"Самый дешёвый"<<endl;
+    for (i=0; i<n; i++)
+    if (min_cost<A[i]){
+    min_cost=A[if;]
+    }
+    else {
+    continue;
+    }
+    return 0;
+}
