@@ -73,24 +73,37 @@ int main () {
 using namespace std;
 
 int main () {
-    int A[20], n;
+    int A[31], n;
     int i;
-    int min_cost=0;
+    int min_num=0;
+    int min_item=0;
     cout << "Введите количество видов конфет"
     <<endl;
     cin >> n;
-    cout << "Введите стоимость конфет"
-    <<endl;
+    cout << "Введите стоимость конфет" <<endl;
+    
     for (i=0; i<n; i++)
     cin >> A[i];
 
-    cout<<"Самый дешёвый"<<endl;
     for (i=0; i<n; i++)
-    if (min_cost<A[i]){
-    min_cost=A[if;]
+    if (i==0){
+        min_item=A[i];
+        min_num=i;
+        
     }
     else {
-    continue;
+        if (min_item==A[i]){
+            min_item=A[i];
+            min_num=i;
+        }
+        if (min_item>A[i]){
+            min_num=i;
+            min_item=A[i];
+        }
+        
     }
+    
+    //min_num+=1;
+    cout << min_num << endl;
     return 0;
 }
