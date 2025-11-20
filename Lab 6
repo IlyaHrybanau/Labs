@@ -33,7 +33,51 @@ int main () {
 }
 
 
-//Ex.2
+//Ex.2#include <iostream>
+using namespace std;
+
+int main() {
+    const int n = 10;
+    double a[n];
+    double b;
+    
+    cout << "Введите " << n << " элементов массива: ";
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    
+    cout << "Введите число b: ";
+    cin >> b;
+    
+    int index = -1;
+    for (int i = 0; i < n; i++) {
+        if (a[i] < b) {
+            index = i;
+            break;
+        }
+    }
+    
+    if (index != -1) {
+        double temp = a[0];
+        a[0] = a[index];
+        a[index] = temp;
+    }
+    
+    double sum_neg = 0;
+    for (int i = 0; i < n; i++) {
+        if (a[i] < 0) {
+            sum_neg += a[i];
+        }
+    }
+    
+    cout << "Массив: ";
+    for (int i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
+    cout << "\nСумма отрицательных: " << sum_neg << endl;
+    
+    return 0;
+}
 #include <iostream>
 using namespace std;
 
