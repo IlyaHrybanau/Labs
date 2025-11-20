@@ -1,4 +1,4 @@
-Ex.1
+// Ex.1
 #include <iostream>
 using namespace std;
 
@@ -33,7 +33,7 @@ int main () {
 }
 
 
-Ex.2
+//Ex.2
 #include <iostream>
 using namespace std;
 
@@ -68,7 +68,7 @@ int main () {
 }
 
 
-//#Ex. 3
+//Ex. 3
 #include <iostream>
 using namespace std;
 
@@ -137,6 +137,60 @@ int main() {
     cout << "Новый массив: ";
     for (int i = 0; i < SIZE; i++) {
         cout << arr[i] << " ";
+    }
+    cout << endl;
+    
+    return 0;
+}
+
+//Ex. 5 
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int MATCHES = 15;
+    int scored[MATCHES];
+    int missed[MATCHES
+    
+    for (int i = 0; i < MATCHES; i++) {
+        scored[i] = rand() % 100 + 50;
+        missed[i] = rand() % 100 + 50;
+    }
+    
+    cout << "Результаты матчей:" << endl;
+    cout << "Матч\tЗабито\tПропущено\tРезультат" << endl;
+    cout << "----------------------------------------" << endl;
+    
+    int wins = 0, losses = 0, draws = 0;
+    
+    for (int i = 0; i < MATCHES; i++) {
+        cout << (i + 1) << " " << scored[i] << " " << missed[i] << " ";
+        
+        if (scored[i] > missed[i]) {
+            cout << "ВЫИГРЫШ";
+            wins++;
+        } else if (scored[i] < missed[i]) {
+            cout << "ПРОИГРЫШ";
+            losses++;
+        } else {
+            cout << "НИЧЬЯ";
+            draws++;
+        }
+        cout << endl;
+    }
+    
+    cout << "\nОбщая статистика:" << endl;
+    cout << "Выигрышей: " << wins << endl;
+    cout << "Проигрышей: " << losses << endl;
+    cout << "Ничьих: " << draws << endl;
+    
+
+    if (wins > losses) {
+        cout << "ВЫИГРЫШ";
+    } else if (wins < losses) {
+        cout << "ПРОИГРЫШ";
+    } else {
+        cout << "НИЧЬЯ";
     }
     cout << endl;
     
