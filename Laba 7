@@ -1,0 +1,36 @@
+////Laba 7
+//Ex.1
+
+
+
+//Ex.2
+#include <iostream>
+#include <cstdlib>  
+#include <ctime>    
+#include <iomanip>  
+#include <locale> 
+
+int main() {
+  setlocale(LC_ALL, ".1251");
+  const int n = 10;
+  const int m = 5;
+  int i, j;
+  int arr[n][m];
+
+  for (i = 0; i < n; i++) {
+    for (j = 0; j < m; j++) {
+      arr[i][j] = rand() % 100;
+    }  
+  }
+    
+
+  for (i = 0; i < n; i++) {
+    for (j = 0; j < m; j++) {
+      cout << " " << arr[i][j];
+    }
+      
+  }
+    
+  
+  return 0;
+}
