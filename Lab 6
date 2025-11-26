@@ -33,125 +33,88 @@ int main () {
 }
 
 
-//Ex.2#include <iostream>
-using namespace std;
-
-int main() {
-    const int n = 10;
-    double a[n];
-    double b;
-    
-    cout << "Введите " << n << " элементов массива: ";
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-    }
-    
-    cout << "Введите число b: ";
-    cin >> b;
-    
-    int index = -1;
-    for (int i = 0; i < n; i++) {
-        if (a[i] < b) {
-            index = i;
-            break;
-        }
-    }
-    
-    if (index != -1) {
-        double temp = a[0];
-        a[0] = a[index];
-        a[index] = temp;
-    }
-    
-    double sum_neg = 0;
-    for (int i = 0; i < n; i++) {
-        if (a[i] < 0) {
-            sum_neg += a[i];
-        }
-    }
-    
-    cout << "Массив: ";
-    for (int i = 0; i < n; i++) {
-        cout << a[i] << " ";
-    }
-    cout << "\nСумма отрицательных: " << sum_neg << endl;
-    
-    return 0;
-}
-#include <iostream>
-using namespace std;
-
-int main () {
-    int A[20], n;
-    int i;
-    cout << "введите размер массива"
-    <<endl;
-    cin >> n;
-    cout << "введите элементы массива"
-    <<endl;
-    for (i=0; i<n; i++)
-    cin >> A[i];
-
-    cout<<"Нечётные"<<endl;
-    for (i=0; i<n; i++)
-    if (i%2==0){
-    cout<<A[i]<<endl;
-    }
-    else {
-    continue;
-    }
-    cout<<"Чётные"<<endl;
-    for (i=0; i<n; i++)
-    if (i%2!=0){
-    cout<<A[i]<<endl;
-    }
-    else {
-    continue;
-    }
-    return 0;
-}
+//////Ex.2
+//#include <iostream>
+//using namespace std;
+//
+//int main() {
+//    setlocale(LC_ALL, ".1251");
+//    const int size = 10;
+//    int arr[size];
+//    int betta, i;
+//    int sum = 0;
+//
+//    cout << "введите betta: " << endl;
+//    cin >> betta;
+//
+//    cout << "введите элементы массива: " << endl;
+//    for (i = 0; i < size; i++) {
+//        cin >> arr[i];
+//    }
+//
+//    for (i = 0; i < size; i++)
+//        if (arr[i] < 0) {
+//            sum += arr[i];
+//        }
+//
+//    for (i = 0; i < size; i++)
+//        if (arr[i] < betta) {
+//            arr[0] = arr[i];
+//            break;
+//        }
+//    cout << "Summa: " << sum << endl;
+//
+//    for (i = 0; i < size; i++)
+//        cout << arr[i] << " ";
+//
+//    
+//
+//    return 0;
+//}
 
 
-//Ex. 3
-#include <iostream>
-using namespace std;
-
-int main () {
-    int A[31], n;
-    int i;
-    int min_num=0;
-    int min_item=0;
-    cout << "Введите количество видов конфет"
-    <<endl;
-    cin >> n;
-    cout << "Введите стоимость конфет" <<endl;
+////Ex. 3
+//#include <iostream>
+//using namespace std;
+//
+//int main() {
+//    setlocale(LC_ALL, ".1251");
+//    int A[31], n;
+//    int i;
+//    int min_num = 0;
+//    int min_item = 0;
+//    cout << "Введите количество видов конфет"
+//        << endl;
+//    cin >> n;
+//    cout << "Введите стоимость конфет" << endl;
+//
+//    for (i = 0; i < n; i++)
+//        cin >> A[i];
+//
+//    for (i = 0; i < n; i++)
+//        if (i == 0) {
+//            min_item = A[i];
+//            min_num = i;
+//
+//        }
+//        else {
+//            if (min_item == A[i]) {
+//                min_item = A[i];
+//                min_num = i;
+//            }
+//            if (min_item > A[i]) {
+//                min_num = i;
+//                min_item = A[i];
+//            }
+//
+//        }
+//
+//    min_num+=1;
+//    cout << "Номер самого дешевого вида: ";
+//    cout << min_num << endl;
+//    return 0;
+//}
     
-    for (i=0; i<n; i++)
-    cin >> A[i];
-
-    for (i=0; i<n; i++)
-    if (i==0){
-        min_item=A[i];
-        min_num=i;
-        
-    }
-    else {
-        if (min_item==A[i]){
-            min_item=A[i];
-            min_num=i;
-        }
-        if (min_item>A[i]){
-            min_num=i;
-            min_item=A[i];
-        }
-        
-    }
-    
-    //min_num+=1;
-    cout << min_num << endl;
-    return 0;
-}
-
 //Ex. 4
 #include <iostream>
 using namespace std;
