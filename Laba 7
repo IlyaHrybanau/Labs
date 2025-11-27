@@ -1,35 +1,43 @@
 ////Laba 7
 //Ex.1
-//Ex.2
 #include <iostream>
-#include <cstdlib>  
-#include <ctime>    
-#include <iomanip>  
+#include <iomanip>
+using namespace std;
 
 int main() {
-  setlocale(LC_ALL, ".1251");
-  const int rows = 12;
-  const int calls = 120;
-  int i, j;
-  int arr[raws][calls];
-
-  for (i = 0; i < rows; i++) {
-    for (j = 0; j < calls; j++) {
-      if (j%2==o){
-      arr};
-    }  
-  }
-
-
-  for (i = 0; i < n; i++) {
-    for (j = 0; j < m; j++) {
-      cout << " " << arr[i][j];
+    const int rows = 12;
+    const int cols = 10;
+    int arr[rows][cols];
+    
+    int start = 1;
+    int total = rows * cols;
+    
+    for (int col = 0; col < cols; col++) {
+        if (col % 2 == 0) {
+            for (int row = 0; row < rows; row++) {
+                if (start <= total) {
+                    arr[row][col] = start++;
+                }
+            }
+        } else {
+            for (int row = rows - 1; row >= 0; row--) {
+                if (start <= total) {
+                    matrix[row][col] = start++;
+                }
+            }
+        }
     }
-
-  }
-
-
-  return 0;
+    
+    cout << "Результат:" << endl;
+    
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << setw(4) << arr[i][j];
+        }
+        cout << endl;
+    }
+    
+    return 0;
 }
 
 
