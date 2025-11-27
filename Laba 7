@@ -107,3 +107,71 @@ int main() {
     return 0;
 }
 
+//Ex.4
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    int a[n][n];
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> a[i][j];
+        }
+    }
+    
+    double prod = 1.0;
+    int count = 0;
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= i; j++) {
+            prod *= a[i][j];
+            count++;
+        }
+    }
+    
+    double geom = pow(prod, 1.0 / count);
+    cout << "Среднее геометрическое: " << geom << endl;
+    
+    return 0;
+}
+
+//Ex. 5
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    int arr[n][n];
+    int pos[n * n], other[n * n];
+    int pos_count = 0, other_count = 0;
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> arr[i][j];
+            if (arr[i][j] > 0) {
+                pos[pos_count++] = arr[i][j];
+            } else {
+                other[other_count++] = arr[i][j];
+            }
+        }
+    }
+    
+    cout << "Положительные: ";
+    for (int i = 0; i < pos_count; i++) {
+        cout << pos[i] << " ";
+    }
+    cout << endl;
+    
+    cout << "Остальные: ";
+    for (int i = 0; i < other_count; i++) {
+        cout << other[i] << " ";
+    }
+    cout << endl;
+    
+    return 0;
+}
