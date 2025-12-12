@@ -1,0 +1,100 @@
+//Ex.1 
+#include <iostream>
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, ".1251");
+    
+    int a, b;
+    cout << "Введите значение a: ";
+    cin >> a;
+    cout << "Введите значение b: ";
+    cin >> b;
+
+    int* pa = &a;
+    int* pb = &b;
+
+    if (*pa > *pb) {
+        *pa *= 5;
+        *pb -= 5;
+    } else {
+        *pb *= 5;
+        *pa -= 5;
+    }
+
+    cout << "После преобразований:\n";
+    cout << "a = " << a << ", b = " << b << endl;
+
+    return 0;
+}
+//ex. 2
+#include <iostream>
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, ".1251");
+    
+    int* p1 = new int;
+    int* p2 = new int;
+
+    *p1 = 42;
+    *p2 = 100;
+
+    cout << "Значение 1: " << *p1 << endl;
+    cout << "Значение 2: " << *p2 << endl;
+
+    delete p1;
+    delete p2;
+
+    return 0;
+}
+
+//ex. 3
+#include <iostream>
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, ".1251");
+    
+    int n;
+    cout << "Введите размер массивов: ";
+    cin >> n;
+
+    int* p = new int[n];
+    int* q = new int[n];
+
+    cout << "Введите элементы массива p:\n";
+    for (int i = 0; i < n; i++) {
+        cin >> p[i];
+    }
+
+    cout << "Введите элементы массива q:\n";
+    for (int i = 0; i < n; i++) {
+        cin >> q[i];
+    }
+
+    int countP = 0, countQ = 0;
+    for (int i = 0; i < n; i++) {
+        if (p[i] > 0) countP++;
+        if (q[i] > 0) countQ++;
+    }
+
+    cout << "Количество положительных в p: " << countP << endl;
+    cout << "Количество положительных в q: " << countQ << endl;
+
+    if (countP > countQ) {
+        cout << "В массиве p больше положительных элементов\n";
+    } else if (countQ > countP) {
+        cout << "В массиве q больше положительных элементов\n";
+    } else {
+        cout << "Количество положительных элементов одинаково\n";
+    }
+
+    delete[] p;
+    delete[] q;
+
+    return 0;
+}
+
+
+//ex. 4
