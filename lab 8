@@ -1,0 +1,128 @@
+// ex.1
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// int main() {
+// 	setlocale(LC_ALL, ".1251");
+//     string country;
+//     string capital;
+
+//     cout << "Введите название государства: ";
+//     getline(cin, country);
+
+//     cout << "Введите название столицы: ";
+//     getline(cin, capital);
+
+//     cout << "Столица государства " << country << " — город " << capital << endl;
+
+//     return 0;
+// 
+
+
+// ex.2
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// int main() {
+// 	   setlocale(LC_ALL, ".1251");
+//     string sent;
+//     char symb;
+    
+//     cout << "Введите предложение: ";
+//     getline(cin, sent);
+    
+//     cout << "Введите символ для поиска: ";
+//     cin >> symb;
+    
+//     cout << "Вхождения символа '" << symb << "':" << endl;
+    
+//     for (int i = 0; i < sent.length(); i++) {
+//         if (sent[i] == symb) {
+//             cout << symb << endl;
+//         }
+//     }
+    
+//     return 0;
+// }
+
+
+
+// // 3
+// #include <iostream>
+// #include <string>
+// using namespace std;
+
+// int main() {
+// 	   setlocale(LC_ALL, ".1251");
+//     string sent;
+    
+//     cout << "Введите предложение: ";
+//     getline(cin, sent);
+    
+//     string result = "";
+    
+//     for (int i = 0; i < sent.length(); i++) {
+//         if (i + 2 < sent.length() && 
+//             sent[i] == 'a' && 
+//             sent[i + 1] == 'b' && 
+//             sent[i + 2] == 'c') {
+            
+//             result += "def";
+//             i += 2;
+//         } 
+//         else {
+//             result += sent[i];
+//         }
+//     }
+    
+//     cout << "Результат: " << result << endl;
+//     return 0;
+// }
+
+// // 4
+// #include <iostream>
+// #include <string>
+// using namespace std;
+// int main() {
+// 	   setlocale(LC_ALL, ".1251");
+//     string word1, word2;
+    
+//     cout << "Введите первое слово: ";
+//     cin >> word1;
+    
+//     cout << "Введите второе слово: ";
+//     cin >> word2;
+    
+//     for (int i = 0; i < word1.length(); i++) {
+//         bool checked = false;
+//         for (int j = 0; j < i; j++) {
+//             if (word1[j] == word1[i]) {
+//                 checked = true;
+//                 break;
+//             }
+//         }
+        
+//         if (already_checked) {
+//             continue;
+//         }
+        
+//         bool found = false;
+//         for (int k = 0; k < word2.length(); k++) {
+//             if (word1[i] == word2[k]) {
+//                 found = true;
+//                 break;
+//             }
+//         }
+//         }
+        
+//         if (found) {
+//             cout << word1[i] << ": Да" << endl;
+//         } else {
+//             cout << word1[i] << ": Нет" << endl;
+//         }
+//     }
+    
+//     return 0;
+// }
