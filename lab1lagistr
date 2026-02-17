@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cstdlib>    
+#include <cmath>   
+#include <ctime>
+using namespace std;
+
+void diagproizv(int n) {
+    int** matrix = new int*[n];
+
+    for (int i = 0; i < n; ++i) {
+        matrix[i] = new int[n];
+    }
+
+    srand(time(0));
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            matrix[i][j] = rand() % 10 + 1;
+        }
+    }
+
+    double sumlog = 0.0;
+    for (int i = 0; i < n; ++i) {
+        sumlog += log(matrix[i][i]);
+    }
+
+    cout << "Для матрицы " << n << endl;
+    cout << "Произведение = " <<sumlog<< endl;
+
+
+    for (int i = 0; i < n; ++i) {
+        delete[] matrix[i];
+    }
+    delete[] matrix; 
+}
+
+
+int main() {
+    setlocale(LC_ALL, ".1251");
+    int nrazmer = 5000;
+
+    diagproizv(nrazmer);
+
+    return 0;
+}
