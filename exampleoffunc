@@ -1,0 +1,75 @@
+//Ex.1
+#include <iostream>
+using namespace std;
+
+int minOfTwo(int a, int b) {
+    if (a < b) {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+int main() {
+    int firstMin = minOfTwo(10, 20);
+    int secondMin = minOfTwo(-5, 3);
+
+    cout << "Меньшее из 10 и 20: " << firstMin << endl;
+    cout << "Меньшее из -5 и 3: " << secondMin << endl;
+
+    return 0;
+}
+
+
+
+//Ex.2
+#include <iostream>
+using namespace std;
+
+void minutesToSeconds(int minutes, int *seconds) {
+    *seconds = minutes * 60;
+}
+
+int main() {
+    int sec1, sec2;
+
+    // Первый вызов
+    minutesToSeconds(5, &sec1);
+    cout << "5 минут = " << sec1 << " секунд" << endl;
+
+    // Второй вызов
+    minutesToSeconds(10, &sec2);
+    cout << "10 минут = " << sec2 << " секунд" << endl;
+
+    return 0;
+}
+
+
+
+//Ex.3 
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+const double PI = 3.141592653589793;
+
+void parallelogramCharacteristics(double a, double b, double angleDegrees, double &perimeter, double &area) {
+    double angleRad = angleDegrees * PI / 180.0;
+    perimeter = 2 * (a + b);
+    area = a * b * sin(angleRad);
+}
+
+int main() {
+    double perim1, area1, perim2, area2;
+
+    // Первый параллелограмм
+    parallelogramCharacteristics(5.0, 3.0, 30.0, perim1, area1);
+    cout << "Параллелограмм 1: периметр = " << perim1 << ", площадь = " << area1 << endl;
+
+    // Второй параллелограмм
+    parallelogramCharacteristics(7.0, 4.0, 45.0, perim2, area2);
+    cout << "Параллелограмм 2: периметр = " << perim2 << ", площадь = " << area2 << endl;
+
+    return 0;
+}
