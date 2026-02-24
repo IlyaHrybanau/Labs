@@ -6,15 +6,25 @@ int func(int a) {
 }
 
 int main(){
-    int side=0;
-    cout<< "Введите сторону квадрата: "<<endl;
-    cin >> side;
-    if (side<=0){
+    int side1, side2;
+    cout<< "Введите 1 сторону квадрата: "<<endl;
+    cin >> side1;
+    cout<< "Введите 2 сторону квадрата: "<<endl;
+    cin >> side2;
+    if (side1<=0){
         cout << "Введите правильное значение!" << endl;
     }
     else{
-        int square= func(side);
-        cout << "Площадь равна " << square;
+        int square1= func(side1);
+        cout << "Площадь1 равна " << square1<<endl;
+    }
+    
+    if (side2<=0){
+        cout << "Введите правильное значение!" << endl;
+    }
+    else{
+        int square2= func(side2);
+        cout << "Площадь2 равна " << square2<< endl;
     }
     
     return 0;
