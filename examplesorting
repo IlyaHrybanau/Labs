@@ -1,0 +1,72 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
+using namespace std;
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int interpolationSearch(int arr[], int size, int key) {
+    for (int low = 0, high = size - 1; low <= high && key >= arr[low] && key <= arr[high];) {
+        if (low == high) {
+            if (arr[low] == key) return low;
+            break;
+        }
+        
+        int pos = low + (((double)(high - low) / (arr[high] - arr[low])) * (key - arr[low]));
+
+        if (arr[pos] == key) {
+            return pos;
+        }
+
+        if (arr[pos] < key) {
+            low = pos + 1;
+        } else {
+            high = pos - 1;
+        }
+    }
+    return -1;
+}
+
+int main() {
+    setlocale(LC_ALL, ".1251");
+    srand(time(0));
+
+    const int SIZE = 20;
+    int numbers[SIZE];
+
+    for (int i = 0; i < SIZE; ++i) {
+        numbers[i] = rand() % 101;
+    }
+
+    bubbleSort(numbers, SIZE);
+
+    cout << "Отсортированный массив: ";
+    for (int i = 0; i < SIZE; ++i) {
+        cout << numbers[i] << " ";
+    }
+    
+    int searchKey;
+    cout << "\nВведите число для поиска: ";
+    cin >> searchKey;
+
+    int result = interpolationSearch(numbers, SIZE, searchKey);
+
+    if (result != -1) {
+        cout << "Элемент " << searchKey << " найден на позиции: " << result << endl;
+    } else {
+        cout << "Элемент " << searchKey << " не найден." << endl;
+    }
+
+    return 0;
+}
