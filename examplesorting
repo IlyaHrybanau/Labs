@@ -17,24 +17,36 @@ void bubbleSort(int arr[], int n) {
 }
 
 int interpolationSearch(int arr[], int size, int key) {
-    for (int low = 0, high = size - 1; low <= high && key >= arr[low] && key <= arr[high];) {
+    int low = 0;
+    int high = size - 1;
+
+    // Цикл продолжается, пока low не превысит high и
+    // ключ находится в пределах текущего диапазона массива.
+    while (low <= high && key >= arr[low] && key <= arr[high]) {
+        // Если low и high совпали, проверяем последний элемент
         if (low == high) {
             if (arr[low] == key) return low;
-            break;
+            return -1;
         }
-        
+
+        // Вычисляем предполагаемую позицию (интерполяция)
         int pos = low + (((double)(high - low) / (arr[high] - arr[low])) * (key - arr[low]));
 
+        // Элемент найден
         if (arr[pos] == key) {
             return pos;
         }
 
+        // Если ключ больше, ищем в правой части
         if (arr[pos] < key) {
             low = pos + 1;
-        } else {
+        }
+        // Если ключ меньше, ищем в левой части
+        else {
             high = pos - 1;
         }
     }
+    // Элемент не найден
     return -1;
 }
 
