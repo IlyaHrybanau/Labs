@@ -1,0 +1,146 @@
+//Ex.1
+#include <iostream>
+using namespace std;
+
+// Функция для массива целых чисел
+int sumMinLast(int arr[], int size) {
+    if (size <= 0) return 0;
+    
+    int minVal = arr[0]; // Предполагаем, что первый элемент минимальный
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < minVal) {
+            minVal = arr[i]; // Обновляем минимум, если нашли число меньше
+        }
+    }
+    return minVal + arr[size - 1];
+}
+
+// Функция для массива вещественных чисел
+double sumMinLast(double arr[], int size) {
+    if (size <= 0) return 0.0;
+    
+    double minVal = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < minVal) {
+            minVal = arr[i];
+        }
+    }
+    return minVal + arr[size - 1];
+}
+
+// Функция для массива символов (работает с кодами ASCII)
+int sumMinLast(char arr[], int size) {
+    if (size <= 0) return 0;
+    
+    char minVal = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < minVal) {
+            minVal = arr[i];
+        }
+    }
+    // Возвращаем сумму кодов символов
+    return (int)minVal + (int)arr[size - 1];
+}
+
+int main() {
+    // Данные для проверки
+    int numsInt[] = {10, 2, 5, 7};           // min=2, last=7. Сумма: 9
+    double numsDouble[] = {3.5, 1.2, 4.8};   // min=1.2, last=4.8. Сумма: 6.0
+    char chars[] = {'f', 'b', 'z'};          // min='b'(98), last='z'(122). Сумма: 220
+
+    cout << "Сумма (int): " << sumMinLast(numsInt, 4) << endl;
+    cout << "Сумма (double): " << sumMinLast(numsDouble, 3) << endl;
+    cout << "Сумма кодов (char): " << sumMinLast(chars, 3) << endl;
+
+    return 0;
+}
+
+//EX.2
+#include <iostream>
+using namespace std;
+
+// Шаблон функции для поиска суммы минимального и последнего элементов
+template <typename T>
+T getSumMinLast(T arr[], int size) {
+    if (size <= 0) return 0;
+
+    T minVal = arr[0]; // Поиск минимума вручную
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < minVal) {
+            minVal = arr[i];
+        }
+    }
+    
+    // Возвращаем сумму минимального и последнего элементов
+    return minVal + arr[size - 1];
+}
+
+// Специализация или отдельная логика для char, если нужно вернуть int (код ASCII)
+// В обычном шаблоне 'a' + 'c' вернет символ, что может выйти за границы char.
+// Поэтому для char лучше явно привести результат к int.
+int getSumMinLastChar(char arr[], int size) {
+    if (size <= 0) return 0;
+    char minVal = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < minVal) minVal = arr[i];
+    }
+    return (int)minVal + (int)arr[size - 1];
+}
+
+int main() {
+    // Массивы разных типов
+    int iArr[] = {10, 3, 5, 8};           // min=3, last=8. Сумма: 11
+    double dArr[] = {4.5, 1.2, 3.3, 0.8}; // min=0.8, last=0.8. Сумма: 1.6
+    char cArr[] = {'d', 'a', 'z'};        // min='a'(97), last='z'(122). Сумма: 219
+
+    // Вызовы шаблона
+    cout << "Результат int: " << getSumMinLast(iArr, 4) << endl;
+    cout << "Результат double: " << getSumMinLast(dArr, 4) << endl;
+    
+    // Для char используем логику с приведением к числу
+    cout << "Результат char (ASCII): " << getSumMinLastChar(cArr, 3) << endl;
+
+    return 0;
+}
+
+
+//Ex.3
+#include <iostream>
+
+using namespace std;
+
+// Рекурсивная функция для нахождения суммы n первых членов
+// a1 - первый член, d - разность, n - количество членов
+double sumProgression(double a1, double d, int n) {
+    // Базовый случай: сумма первого члена равна самому члену
+    if (n == 1) {
+        return a1;
+    }
+    
+    // Находим текущий (n-й) член прогрессии
+    double an = a1 + (n - 1) * d;
+    
+    // Рекурсивный шаг: текущий член + сумма всех предыдущих
+    return an + sumProgression(a1, d, n - 1);
+}
+
+int main() {
+    double firstTerm, difference;
+    int count;
+
+    cout << "Введите первый член прогрессии (a1): ";
+    cin >> firstTerm;
+    cout << "Введите разность прогрессии (d): ";
+    cin >> difference;
+    cout << "Введите количество членов (n): ";
+    cin >> count;
+
+    if (count <= 0) {
+        cout << "Количество членов должно быть положительным!" << endl;
+    } else {
+        double result = sumProgression(firstTerm, difference, count);
+        cout << "Сумма первых " << count << " членов: " << result << endl;
+    }
+
+    return 0;
+}
