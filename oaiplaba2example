@@ -1,0 +1,216 @@
+//Ex.1
+#include <iostream>
+using namespace std;
+
+// Функция ищет сумму отрицательных элементов
+// Передаем массив (через указатель или []) и его размер
+double sumNegative(double arr[], int size) {
+    double sum = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] < 0) {
+            sum += arr[i];
+        }
+    }
+    return sum;
+}
+
+int main() {
+    // Инициализация массивов (смешанные числа для теста)
+    double x[10] = {-1.5, 2.0, -3.4, 4.0, -5.1, 6.0, -7.2, 8.0, -9.3, 10.0};
+    double y[10] = {10, -20, 30, -40, 50, -60, 70, -80, 90, -100};
+    double z[5] = {-1.1, -2.2, 3.3, 4.4, -5.5};
+
+    // Вызов функции для каждого массива и вывод результатов
+    cout << "Сумма отрицательных в x: " << sumNegative(x, 10) << endl;
+    cout << "Сумма отрицательных в y: " << sumNegative(y, 10) << endl;
+    cout << "Сумма отрицательных в z: " << sumNegative(z, 5) << endl;
+
+    return 0;
+}
+
+//Ex.2
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Функция принимает строку (по ссылке для скорости) и искомый символ
+int countChar(const string& text, char target) {
+    int count = 0;
+    for (int i = 0; i < text.length(); i++) {
+        if (text[i] == target) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    // Пример строки (можно заменить на ввод через getline(cin, S1))
+    string S1 = "((Пример текста) с (несколькими) скобками)";
+
+    // Считаем открывающиеся и закрывающиеся скобки
+    int openCount = countChar(S1, '(');
+    int closeCount = countChar(S1, ')');
+
+    cout << "Строка: " << S1 << endl;
+    cout << "Открывающих скобок: " << openCount << endl;
+    cout << "Закрывающих скобок: " << closeCount << endl;
+
+    // Сравниваем результаты
+    if (openCount == closeCount) {
+        cout << "Результат: Количество скобок совпадает." << endl;
+    } else {
+        cout << "Результат: Количество скобок НЕ совпадает." << endl;
+    }
+
+    return 0;
+}
+
+//Ex.3
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+// Структура для анкетных данных
+struct Student {
+    string fio;
+    int birthYear;
+    string address;
+    string parentsInfo;
+    double averageGrade;
+};
+
+// Функция ввода массива студентов
+void inputStudents(Student group[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "--- Студент #" << i + 1 << " ---" << endl;
+        cout << "ФИО: ";
+        getline(cin >> ws, group[i].fio); // ws игнорирует лишние пробелы/переносы
+        cout << "Год рождения: ";
+        cin >> group[i].birthYear;
+        cout << "Адрес: ";
+        getline(cin >> ws, group[i].address);
+        cout << "Сведения о родителях: ";
+        getline(cin >> ws, group[i].parentsInfo);
+        cout << "Средний балл: ";
+        cin >> group[i].averageGrade;
+    }
+}
+
+// Функция поиска лучшего студента (возвращает объект структуры)
+Student findBestStudent(Student group[], int n) {
+    int bestIndex = 0;
+    for (int i = 1; i < n; i++) {
+        if (group[i].averageGrade > group[bestIndex].averageGrade) {
+            bestIndex = i;
+        }
+    }
+    return group[bestIndex];
+}
+
+// Функция вывода данных о студенте
+void printStudent(Student s) {
+    cout << "ФИО: " << s.fio << " | Балл: " << s.averageGrade << endl;
+}
+
+int main() {
+    int n;
+    cout << "Введите количество студентов в группах: ";
+    cin >> n;
+
+    // Создаем два массива (группы)
+    Student group1[100], group2[100]; // Или используйте динамический массив/vector
+
+    cout << "\nЗАПОЛНЕНИЕ ГРУППЫ №1" << endl;
+    inputStudents(group1, n);
+
+    cout << "\nЗАПОЛНЕНИЕ ГРУППЫ №2" << endl;
+    inputStudents(group2, n);
+
+    // Ищем лучших в каждой группе
+    Student best1 = findBestStudent(group1, n);
+    Student best2 = findBestStudent(group2, n);
+
+    cout << "\n--- РЕЗУЛЬТАТЫ ---" << endl;
+    cout << "Лучший в группе 1: ";
+    printStudent(best1);
+
+    cout << "Лучший в группе 2: ";
+    printStudent(best2);
+
+    return 0;
+}
+
+//Ex.4
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const int N = 3; // Размерность квадратных матриц (можно изменить)
+
+typedef double Matrix[N][N];
+
+// Функция для вычисления квадрата матрицы (R = M * M)
+void squareMatrix(Matrix M, Matrix R) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            R[i][j] = 0;
+            for (int k = 0; k < N; k++) {
+                R[i][j] += M[i][k] * M[k][j];
+            }
+        }
+    }
+}
+
+// Функция для вычисления суммы элементов последней строки
+double sumLastRow(Matrix M) {
+    double sum = 0;
+    for (int j = 0; j < N; j++) {
+        sum += M[N - 1][j]; // Индекс последней строки: N-1
+    }
+    return sum;
+}
+
+// Вспомогательная функция для вывода матрицы
+void printMatrix(Matrix M) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            cout << M[i][j] << "\t";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    // Инициализация трех матриц
+    Matrix A = {{1, 2, 3}, {4, 5, 6}, {1, 1, 1}};
+    Matrix B = {{2, 0, 0}, {0, 2, 0}, {5, 5, 5}};
+    Matrix C = {{1, 0, 1}, {0, 1, 0}, {0, 0, 1}};
+
+    // Матрицы для хранения результатов квадратов (если нужно по задаче)
+    // Но условие просит найти матрицу с наим. суммой строки среди исходных или их квадратов?
+    // Обычно в таких задачах имеется в виду работа с исходными матрицами.
+    
+    double sumA = sumLastRow(A);
+    double sumB = sumLastRow(B);
+    double sumC = sumLastRow(C);
+
+    cout << "Сумма последней строки A: " << sumA << endl;
+    cout << "Сумма последней строки B: " << sumB << endl;
+    cout << "Сумма последней строки C: " << sumC << endl;
+
+    cout << "\nРезультат: ";
+    if (sumA <= sumB && sumA <= sumC) {
+        cout << "Матрица A имеет наименьшую сумму последней строки." << endl;
+    } else if (sumB <= sumA && sumB <= sumC) {
+        cout << "Матрица B имеет наименьшую сумму последней строки." << endl;
+    } else {
+        cout << "Матрица C имеет наименьшую сумму последней строки." << endl;
+    }
+
+    return 0;
+}
