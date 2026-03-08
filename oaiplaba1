@@ -1,0 +1,75 @@
+//Ex.1
+#include <iostream>
+using namespace std;
+
+int square(int a) {
+   return a*a;
+}
+
+int main() {
+    int first = square(5);
+    int second = square(10);
+
+    cout << "1 " << first << endl;
+    cout << "2 " << second << endl;
+
+    return 0;
+}
+
+//Ex.2
+#include <iostream>
+using namespace std;
+
+void delen(int a, int b, int* res) {
+    if (b != 0) {
+        *res = a % b;
+    } else {
+        cout << "Ошибка: деление на ноль!" << endl;
+    }
+}
+
+int main() {
+    int result; 
+
+    delen(17, 5, &result);
+    cout << "17 % 5 = " << result << endl;
+
+    delen(42, 10, &result);
+    cout << "42 % 10 = " << result << endl;
+
+    delen(9, 4, &result);
+    cout << "9 % 4 = " << result << endl;
+
+    return 0;
+}
+
+//Ex.3
+#include <iostream>
+#include <cmath> 
+
+using namespace std;
+
+// ссылки, s и v изменятся прямо в main
+void getSphere(double r, double &s, double &v) {
+    const double PI = 3.1415926535; 
+    
+    s = 4 * PI * r * r;           
+    v = (4.0 / 3.0) * PI * r * r * r;
+}
+
+int main() {
+    double radius1 = 5.0, area1, volume1;
+    double radius2 = 12.5, area2, volume2;
+
+
+    getSphere(radius1, area1, volume1);
+    cout << "Сфера 1 (R=" << radius1 << "):" << endl;
+    cout << "Площадь: " << area1 << ", Объем: " << volume1 << endl << endl;
+
+
+    getSphere(radius2, area2, volume2);
+    cout << "Сфера 2 (R=" << radius2 << "):" << endl;
+    cout << "Площадь: " << area2 << ", Объем: " << volume2 << endl;
+
+    return 0;
+}
