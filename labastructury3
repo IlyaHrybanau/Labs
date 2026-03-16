@@ -1,0 +1,90 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <iomanip>
+#include <conio.h>
+using namespace std;
+
+
+int main() {
+	setlocale(LC_ALL, ".1251");
+	srand(time(0));
+
+	//массив символов
+	const int MAX = 10;
+	char mystring[MAX];
+	cout << "Изначально" << endl;
+	for (int j = 0; j < 5; j++) {
+		cout << mystring[j] << " ";
+	}
+	cout << "\n";
+
+	cout << "введите символы: ";
+	for (int i = 0; i < MAX - 1; i++)
+		cin >> mystring[i];
+
+	mystring[MAX - 1] = '\0';
+	cout << "Вывод строки: " << mystring << endl;
+	_getch();
+
+	cout << "Вывод посимвольно: " << endl;
+	for (int i = 0; mystring[i] != '\0'; i++) {
+		cout << mystring[i] << " ";
+	}
+	cout << "\n";
+	// вывод: вместо мусора изначально вывелось что мы ввели
+	
+
+
+	//Первый указатель
+	char* ptr;
+	ptr = mystring;
+
+	cout <<"soderjimoe stroki" << ptr << endl;
+	cout << "adress = " << (void*)ptr << endl;
+	cout << "6punkt = " << (void*)ptr << endl;
+
+
+	/*статический одномерный*/
+	short arrnum[5];
+	for (int i = 0; i < 5; i++) {
+		arrnum[i]=i+1;
+	}
+
+	cout << "До ввода " << endl;
+	for (int i = 0; i < 5; i++) {
+		cout << arrnum[i] << " ";
+	}
+	cout << "\n";
+
+	cout << "Введите массив" << endl;
+	for (int i = 0; i < 5; i++) {
+		cin >> arrnum[i];
+	}
+	cout << "\n";
+
+	cout << "После ввода " << endl;
+	for (int i = 0; i < 5; i++) {
+		cout << arrnum[i] << " ";
+	}
+
+
+
+
+	//указатель 2 на этот массив
+	short* arrsymb;
+
+	///*трехмерный*/
+	//int arr3d[2][2][3];
+	//int (*ptr)[2][3] = arr3d;
+
+	///*двумерный*/
+	//int arr2d[4][4];
+	////указатель 3
+	//int(*ptr)[4] = arr2d;
+
+
+
+	return 0;
+}
+
