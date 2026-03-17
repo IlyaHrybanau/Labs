@@ -21,55 +21,60 @@ int main() {
 using namespace std;
 
 void delen(int a, int b, int* res) {
-    if (b != 0) {
-        *res = a % b;
-    } else {
-        cout << "Ошибка: деление на ноль!" << endl;
+    if (b!=0) {
+        *res = a%b;
     }
+    else {
+        cout << "Ошибка" << endl;
+    }
+
 }
 
 int main() {
-    int result; 
+    int result;
 
-    delen(17, 5, &result);
-    cout << "17 % 5 = " << result << endl;
+    cout << "Остаток от деления"<< endl;
 
-    delen(42, 10, &result);
-    cout << "42 % 10 = " << result << endl;
+    delen(10, 3, &result);
+    cout <<"При 10 и 3 = "<< result << endl;
 
-    delen(9, 4, &result);
-    cout << "9 % 4 = " << result << endl;
+    delen(52, 50, &result);
+    cout <<"При 52 и 50 = "<< result << endl;
+
+    delen(40, 19, &result);
+    cout <<"При 40 и 19 = "<< result << endl;
+
 
     return 0;
 }
 
 //Ex.3
 #include <iostream>
-#include <cmath> 
-
 using namespace std;
 
-// ссылки, s и v изменятся прямо в main
-void getSphere(double r, double &s, double &v) {
-    const double PI = 3.1415926535; 
-    
-    s = 4 * PI * r * r;           
-    v = (4.0 / 3.0) * PI * r * r * r;
+void sphera(double r, double &s, double &v) {
+    const double pi = 3.14;
+
+    s = 4 * pi * (r*r);
+    v = (4.0/3.0) * pi * (r*r*r);
+
 }
 
 int main() {
-    double radius1 = 5.0, area1, volume1;
-    double radius2 = 12.5, area2, volume2;
+    double radius1 = 5.0, s1, v1;
+    double radius2 = 10.0, s2, v2;
 
+    sphera(radius1, s1, v1); 
+    cout << "1 SPHERA"<< endl;
+    cout << "Radius = " << radius1 << endl;
+    cout << "Ploshad = " << s1 << endl;
+    cout << "Obyom = " << v1 << endl;
 
-    getSphere(radius1, area1, volume1);
-    cout << "Сфера 1 (R=" << radius1 << "):" << endl;
-    cout << "Площадь: " << area1 << ", Объем: " << volume1 << endl << endl;
-
-
-    getSphere(radius2, area2, volume2);
-    cout << "Сфера 2 (R=" << radius2 << "):" << endl;
-    cout << "Площадь: " << area2 << ", Объем: " << volume2 << endl;
-
+    sphera(radius2, s2, v2);
+    cout << "2 SPHERA"<< endl;
+    cout << "Radius = " << radius2 << endl;
+    cout << "Ploshad = " << s2 << endl;
+    cout << "Obyom = " << v2 << endl;
+    
     return 0;
 }
