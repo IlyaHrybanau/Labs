@@ -1,0 +1,101 @@
+//Ex.4
+#include <iostream>
+using namespace std;
+
+const int MAXN = 10;
+
+void squareMatrix(int mat[][MAXN], int result[][MAXN], int n) {
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            result[i][j] = 0;
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            for (int k = 0; k < n; k++)
+                result[i][j] += mat[i][k] * mat[k][j];
+}
+
+int lastRowSum(int mat[][MAXN], int n) {
+    int sum = 0;
+    for (int j = 0; j < n; j++)
+        sum += mat[n - 1][j];
+    return sum;
+}
+
+void printMatrix(int mat[][MAXN], int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++)
+            cout << mat[i][j] << "\t";
+        cout << endl;
+    }
+}
+
+int main() {
+    int n;
+    cout << "Введите размер матриц (n x n): ";
+    cin >> n;
+
+    int A[MAXN][MAXN], B[MAXN][MAXN], C[MAXN][MAXN];
+    int A2[MAXN][MAXN], B2[MAXN][MAXN], C2[MAXN][MAXN];
+
+    cout << "\nВведите элементы матрицы A:\n";
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++) {
+            cout << "[" << i << "][" << j << "]: ";
+            cin >> A[i][j];
+        }
+
+    cout << "\nВведите элементы матрицы B:\n";
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++) {
+            cout << "[" << i << "][" << j << "]: ";
+            cin >> B[i][j];
+        }
+
+    cout << "\nВведите элементы матрицы C:\n";
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++) {
+            cout << "[" << i << "][" << j << "]: ";
+            cin >> C[i][j];
+        }
+
+    squareMatrix(A, A2, n);
+    squareMatrix(B, B2, n);
+    squareMatrix(C, C2, n);
+
+    int sumA = lastRowSum(A2, n);
+    int sumB = lastRowSum(B2, n);
+    int sumC = lastRowSum(C2, n);
+
+    cout << "\n=== Квадраты матриц и суммы последних строк ===\n";
+
+    cout << "\nМатрица A^2:\n";
+    printMatrix(A2, n);
+    cout << "Сумма последней строки: " << sumA << endl;
+
+    cout << "\nМатрица B^2:\n";
+    printMatrix(B2, n);
+    cout << "Сумма последней строки: " << sumB << endl;
+
+    cout << "\nМатрица C^2:\n";
+    printMatrix(C2, n);
+    cout << "Сумма последней строки: " << sumC << endl;
+
+    // Ищем минимум начиная с sumA — INT_MAX не нужен
+    int minSum = sumA;
+    char minName = 'A';
+
+    if (sumB < minSum) {
+        minSum = sumB;
+        minName = 'B';
+    }
+    if (sumC < minSum) {
+        minSum = sumC;
+        minName = 'C';
+    }
+
+    cout << "\n>>> Матрица с наименьшей суммой последней строки: "
+         << minName << "^2 (сумма = " << minSum << ")\n";
+
+    return 0;
+}
