@@ -1,0 +1,130 @@
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+// --- Структуры ---
+
+struct Parents {
+    string fatherName;  // ФИО отца
+    string motherName;  // ФИО матери
+};
+
+struct Student {
+    string fullName;    // Ф. И. О.
+    int birthYear;      // Год рождения
+    string address;     // Адрес
+    Parents parents;    // Сведения о родителях
+    double gpa;         // Средний балл
+};
+
+// --- Функция ввода массива студентов ---
+
+void inputGroup(Student* group, int n, int groupNumber) {
+    cout << "\n=== Ввод данных для группы " << groupNumber << " ===\n";
+    for (int i = 0; i < n; i++) {
+        cout << "\n--- Студент #" << (i + 1) << " ---\n";
+
+        cout << "  Ф. И. О.: ";
+        cin.ignore();
+        getline(cin, group[i].fullName);
+
+        cout << "  Год рождения: ";
+        cin >> group[i].birthYear;
+
+        cout << "  Адрес: ";
+        cin.ignore();
+        getline(cin, group[i].address);
+
+        cout << "  ФИО отца: ";
+        getline(cin, group[i].parents.fatherName);
+
+        cout << "  ФИО матери: ";
+        getline(cin, group[i].parents.motherName);
+
+        cout << "  Средний балл (0.0 - 5.0): ";
+        cin >> group[i].gpa;
+    }
+}
+
+// --- Функция вывода массива студентов ---
+
+void printGroup(const Student* group, int n, int groupNumber) {
+    cout << "\n========================================\n";
+    cout << "  ГРУППА " << groupNumber << " (" << n << " студентов)\n";
+    cout << "========================================\n";
+    for (int i = 0; i < n; i++) {
+        cout << "\nСтудент #" << (i + 1) << ":\n";
+        cout << "  Ф. И. О.       : " << group[i].fullName    << "\n";
+        cout << "  Год рождения   : " << group[i].birthYear   << "\n";
+        cout << "  Адрес          : " << group[i].address     << "\n";
+        cout << "  Отец           : " << group[i].parents.fatherName << "\n";
+        cout << "  Мать           : " << group[i].parents.motherName << "\n";
+        cout << "  Средний балл   : " << group[i].gpa         << "\n";
+    }
+}
+
+// --- Функция нахождения лучшего студента (по среднему баллу) ---
+
+Student findBest(const Student* group, int n) {
+    int bestIndex = 0;
+    for (int i = 1; i < n; i++) {
+        if (group[i].gpa > group[bestIndex].gpa) {
+            bestIndex = i;
+        }
+    }
+    return group[bestIndex];
+}
+
+// --- Главная функция ---
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    int n1, n2;
+
+    cout << "Введите количество студентов в группе 1: ";
+    cin >> n1;
+    cout << "Введите количество студентов в группе 2: ";
+    cin >> n2;
+
+    Student* group1 = new Student[n1];
+    Student* group2 = new Student[n2];
+
+    inputGroup(group1, n1, 1);
+    inputGroup(group2, n2, 2);
+
+    printGroup(group1, n1, 1);
+    printGroup(group2, n2, 2);
+
+    Student best1 = findBest(group1, n1);
+    Student best2 = findBest(group2, n2);
+
+    cout << "\n========================================\n";
+    cout << "  ЛУЧШИЙ СТУДЕНТ ГРУППЫ 1\n";
+    cout << "========================================\n";
+    cout << "  Ф. И. О.     : " << best1.fullName  << "\n";
+    cout << "  Средний балл : " << best1.gpa        << "\n";
+
+    cout << "\n========================================\n";
+    cout << "  ЛУЧШИЙ СТУДЕНТ ГРУППЫ 2\n";
+    cout << "========================================\n";
+    cout << "  Ф. И. О.     : " << best2.fullName  << "\n";
+    cout << "  Средний балл : " << best2.gpa        << "\n";
+
+    cout << "\n========================================\n";
+    if (best1.gpa >= best2.gpa) {
+        cout << "  ЛУЧШИЙ СТУДЕНТ СРЕДИ ДВУХ ГРУПП:\n";
+        cout << "  " << best1.fullName << " (группа 1, балл: " << best1.gpa << ")\n";
+    } else {
+        cout << "  ЛУЧШИЙ СТУДЕНТ СРЕДИ ДВУХ ГРУПП:\n";
+        cout << "  " << best2.fullName << " (группа 2, балл: " << best2.gpa << ")\n";
+    }
+    cout << "========================================\n";
+
+    delete[] group1;
+    delete[] group2;
+
+    return 0;
+}
+```
