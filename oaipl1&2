@@ -1,0 +1,214 @@
+////Ex.1
+//#include <iostream>
+//#include <cstdlib>
+//using namespace std;
+//
+//int square(int a) {
+//    return a * a;
+//}
+//
+//int main() {
+//    setlocale(LC_ALL, ".1251");
+//    int x, b;
+//
+//    cout << "Площадь квадрата по заданной стороне" << "\n";
+//
+//    cout << "Введите первую сторону: ";
+//    cin >> x;
+//    int first = square(x);
+//    cout << "Первая площадь = " << first << endl;
+//
+//    cout << "Введите вторую сторону: " << endl;
+//    cin >> b;
+//    int second = square(b);
+//    cout << "Вторая площадь = " << second << endl;
+//
+//    return 0;
+//}
+
+////Ex.2
+//#include <iostream>
+//#include <cstdlib>
+//using namespace std;
+//
+//void delen(int a, int b, int* res) {
+//    if (b != 0 && a!=0) {
+//        *res = a % b;
+//    }
+//    else {
+//        cout << "Ошибка" << endl;
+//    }
+//
+//}
+//
+//int main() {
+//    setlocale(LC_ALL, ".1251");
+//    int result;
+//    int x, y;
+//
+//    cout << "Остаток от деления" << endl;
+//
+//    for (int i = 0; i < 3; i++) {
+//        cout << "Введите значение X для деления: ";
+//        cin >> x;
+//
+//        cout << "Введите значение Y для деления: ";
+//        cin >> y;
+//
+//        delen(x, y, &result);
+//        cout << "При " << x << " и " <<  y  << " = " << result << endl;
+//        cout << "\n";
+//    }
+//
+//    return 0;
+//}
+
+////Ex.3
+//#include <iostream>
+//#include <cstdlib>
+//#include <iomanip>
+//using namespace std;
+//
+//void sphera(double r, double& s, double& v) {
+//    const double pi = 3.14;
+//
+//    s = 4 * pi * (r * r);
+//    v = (4.0 / 3.0) * pi * (r * r * r);
+//
+//}
+//
+//int main() {
+//    setlocale(LC_ALL, ".1251");
+//    double radius = 5.0, s, v;
+//
+//    cout << "Площадь и объем по сферы " << "\n";
+//
+//    for (int i = 0; i < 2; i++) {
+//        cout << "Введите значение радиус сферы: ";
+//        cin >> radius;
+//        cout << "\n";
+//
+//        sphera(radius, s, v);
+//        cout << setw(20) <<"Первая сфера" << endl;
+//        cout << "Радиус = " << radius << endl;
+//        cout << "Площадь = " << s << endl;
+//        cout << "объем = " << v << endl;
+//
+//        cout << "\n";
+//        
+//    }
+//
+//    return 0;
+//}
+
+////Laba2
+////Ex.1
+//
+//#include <iostream>
+//#include <cstdlib>
+//using namespace std;
+//
+//double sumneg(double arr[], int size) {
+//	double sum = 0;
+//	for (int i = 0; i < size; i++) {
+//		if (arr[i] < 0) {
+//			sum += arr[i];
+//		}
+//	}
+//	return sum;
+//}
+//
+//int main() {
+//	setlocale(LC_ALL, ".1251");
+//	srand(time(0));
+//	double x[10];
+//	double y[10];
+//	double z[5];
+//
+//	for (int i = 0; i < 10; i++) {
+//		x[i] = rand() % 20 - 10;
+//		y[i] = rand() % 20 - 10;
+//	}
+//
+//	for (int j = 0; j < 5; j++) {
+//		z[j] = rand() % 20 - 10;
+//	}
+//
+//	cout << "Массив X из 10 элементов: " << "\n";
+//	for (int i = 0; i < 10; i++) {
+//		cout << x[i] << " ";
+//	}
+//	cout << "\n";
+//
+//	cout << "Массив Y из 10 элементов: " << "\n";
+//	for (int i = 0; i < 10; i++) {
+//		cout << y[i] << " ";
+//	}
+//	cout << "\n";
+//
+//	cout << "Массив Z из 5 элементов: " << "\n";
+//	for (int i = 0; i < 5; i++) {
+//		cout << z[i] << " ";
+//	}
+//	cout << "\n";
+//
+//	cout << "Сумма отрицательных элементов массива x = " << sumneg(x, 10) << endl;
+//	cout << "Сумма отрицательных элементов массива y = " << sumneg(y, 10) << endl;
+//	cout << "Сумма отрицательных элементов массива z = " << sumneg(z, 5) << endl;
+//
+//}
+
+//Ex.2
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <windows.h>
+
+using namespace std;
+
+int countsymb(const string& stroka, char iskomoe) {
+	int count = 0;
+	for (int i = 0; i < stroka.length(); i++) {
+		if (stroka[i] == iskomoe) {
+			count += 1;
+		}
+	}
+	return count;
+}
+
+int main() {
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	char symv;
+	int countopen, countclose;
+	
+
+	string text;
+    
+    cout << "Введите строку: ";
+    getline(cin, text);
+    
+    cout << "Вы ввели: " << text << endl;
+
+	cout << "Введите искомый символ" << endl;
+	cin >> symv;
+
+	countopen = countsymb(text, '(');
+	countclose = countsymb(text, ')'); 
+
+	cout << "Число появлений искомого символа" << symv << " = " << countsymb(text, symv) << endl;
+	cout << "Число появлений '(' = " << countopen << endl;
+	cout << "Число появлений ')' = " << countclose << endl;
+
+	if (countopen == countclose) {
+		cout << "Кол-во '(' и ')' совпадает " << endl;
+	}
+	else if (countopen > countclose) {
+		cout << "Кол-во '(' больше чем ')' " << endl;
+	}
+	else if (countopen < countclose) {
+		cout << "Кол-во ')' больше чем '(' " << endl;
+	}
+
+	return 0;
+}
