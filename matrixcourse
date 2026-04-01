@@ -1,0 +1,142 @@
+//Матрица
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+//Ввод от руки
+void fillarr(int** a, int n) {
+    cout << "Введите элементы матрицы (" << n << "x" << n << "):\n";
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++) {
+            cout << "a[" << i << "][" << j << "] = ";
+            if (!(cin >> a[i][j])) {
+                cout << "Ошибка: некорректный ввод!\n";
+                exit(1);
+            }
+        }
+}
+
+//Случайно
+void randarr(int** a, int n, int lo, int hi) {
+    srand((unsigned)time(0));
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            a[i][j] = lo + rand() % (hi - lo + 1);
+}
+
+//Вывод матрицы
+void printmatrix(int** a, int n) {
+    cout << "\nМатрица:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++)
+            cout << a[i][j] << "\t";
+        cout << "\n";
+    }
+}
+
+
+
+//Наибольший положительный напобочной диагонали
+bool maxplusofpdiag(int** a, int n, int& result) {
+    bool found = false;
+    for (int i = 0; i < n; i++) {
+        int j = n - 1 - i;
+        if (a[i][j] > 0) {
+            if (!found || a[i][j] > result) {
+                result = a[i][j];
+                found = true;
+            }
+        }
+    }
+    return found;
+}
+
+//Кратно 3
+void countmultof3(int** a, int n, int* cnt) {
+    for (int i = 0; i < n; i++) {
+        cnt[i] = 0;
+        for (int j = 0; j < n; j++)
+            if (a[i][j] % 3 == 0)
+                cnt[i]++;
+    }
+}
+
+int main() {
+    int n;
+    cout << "Введите размер матрицы n: ";
+    if (!(cin >> n) || n <= 0) {
+        cout << "Ошибка: размер матрицы должен быть положительным целым числом!\n";
+        return 1;
+    }
+
+    int** a = new int* [n];
+    for (int i = 0; i < n; i++)
+        a[i] = new int[n];
+
+    int choice;
+    cout << "Способ заполнения:";
+    cout << "1-Вручную";
+    cout << "2-Случайные числа";
+    cout << "Выбор: ";
+    if (!(cin >> choice) || (choice != 1 && choice != 2)) {
+        cout << "Ошибка: введите 1 или 2!\n";
+        for (int i = 0; i < n; i++) delete[] a[i];
+        delete[] a;
+        return 1;
+    }
+
+    if (choice == 1) {
+        fillarr(a, n);
+    }
+    else {
+        int lo, hi;
+        cout << "Введите нижнюю границу диапазона: ";
+        if (!(cin >> lo)) {
+            cout << "Ошибка: некорректный ввод границы!\n";
+            for (int i = 0; i < n; i++) {
+                delete[] a[i];
+            }
+            delete[] a;
+            return 1;
+        }
+        cout << "Введите верхнюю границу диапазона: ";
+        if (!(cin >> hi)) {
+            cout << "Ошибка: некорректный ввод границы!\n";
+            for (int i = 0; i < n; i++) {
+                delete[] a[i];
+            }
+            delete[] a;
+            return 1;
+        }
+        if (lo > hi) {
+            cout << "Ошибка: нижняя граница больше верхней!\n";
+            for (int i = 0; i < n; i++) {
+                delete[] a[i];
+            }
+            delete[] a;
+            return 1;
+        }
+        randarr(a, n, lo, hi);
+    }
+
+    printmatrix(a, n);
+
+    int maxVal = 0;
+    if (maxplusofpdiag(a, n, maxVal))
+        cout << "Наибольший положительный элемент побочной диагонали: " << maxVal << "\n";
+    else
+        cout << "На побочной диагонали нет положительных элементов.\n";
+
+    int* cnt = new int[n];
+    countmultof3(a, n, cnt);
+    cout << "Количество кратных 3 в каждой строке: ";
+    for (int i = 0; i < n; i++)
+        cout << "Строка " << i << ": " << cnt[i] << "\n";
+
+    delete[] cnt;
+    for (int i = 0; i < n; i++) delete[] a[i];
+    delete[] a;
+
+    return 0;
+}
