@@ -53,14 +53,15 @@ bool maxplusofpdiag(int** a, int n, int& result) {
 }
 
 //Кратно 3
-void countmultof3(int** a, int n, int* cnt) {
+int* cnt = new int[n];
+    countmultof3(a, n, cnt);
+    cout << "Количество кратных 3 в каждой строке: " << endl;
+    int totalMult3 = 0;
     for (int i = 0; i < n; i++) {
-        cnt[i] = 0;
-        for (int j = 0; j < n; j++)
-            if (a[i][j] % 3 == 0)
-                cnt[i]++;
+        cout << "Строка " << i << ": " << cnt[i] << endl;
+        totalMult3 += cnt[i];
     }
-}
+    cout << "Всего кратных 3 в матрице: " << totalMult3 << endl
 
 int main() {
     setlocale(LC_ALL, ".1251");
