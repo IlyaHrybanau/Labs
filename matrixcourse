@@ -6,12 +6,12 @@ using namespace std;
 
 //Ввод от руки
 void fillarr(int** a, int n) {
-    cout << "Введите элементы матрицы (" << n << "x" << n << "):\n";
+    cout << "Введите элементы матрицы (" << n << "x" << n << "): " << endl;
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++) {
             cout << "a[" << i << "][" << j << "] = ";
             if (!(cin >> a[i][j])) {
-                cout << "Ошибка: некорректный ввод!\n";
+                cout << "Ошибка: некорректный ввод!" << endl;
                 exit(1);
             }
         }
@@ -27,7 +27,7 @@ void randarr(int** a, int n, int lo, int hi) {
 
 //Вывод матрицы
 void printmatrix(int** a, int n) {
-    cout << "\nМатрица:\n";
+    cout << "Матрица:";
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++)
             cout << a[i][j] << "\t";
@@ -63,10 +63,11 @@ void countmultof3(int** a, int n, int* cnt) {
 }
 
 int main() {
+    setlocale(LC_ALL, ".1251");
     int n;
     cout << "Введите размер матрицы n: ";
     if (!(cin >> n) || n <= 0) {
-        cout << "Ошибка: размер матрицы должен быть положительным целым числом!\n";
+        cout << "Ошибка: размер матрицы должен быть положительным целым числом!" << endl;
         return 1;
     }
 
@@ -75,10 +76,10 @@ int main() {
         a[i] = new int[n];
 
     int choice;
-    cout << "Способ заполнения:";
-    cout << "1-Вручную";
-    cout << "2-Случайные числа";
-    cout << "Выбор: ";
+    cout << "Выберите способ заполнения:" << endl;
+    cout << "1-Вручную" << endl;
+    cout << "2-Случайными числами" << endl; 
+    cout << "Ваш выбор: ";
     if (!(cin >> choice) || (choice != 1 && choice != 2)) {
         cout << "Ошибка: введите 1 или 2!\n";
         for (int i = 0; i < n; i++) delete[] a[i];
@@ -93,7 +94,7 @@ int main() {
         int lo, hi;
         cout << "Введите нижнюю границу диапазона: ";
         if (!(cin >> lo)) {
-            cout << "Ошибка: некорректный ввод границы!\n";
+            cout << "Ошибка: некорректный ввод границы!"<<endl;
             for (int i = 0; i < n; i++) {
                 delete[] a[i];
             }
@@ -102,7 +103,7 @@ int main() {
         }
         cout << "Введите верхнюю границу диапазона: ";
         if (!(cin >> hi)) {
-            cout << "Ошибка: некорректный ввод границы!\n";
+            cout << "Ошибка: некорректный ввод границы!"<<endl;
             for (int i = 0; i < n; i++) {
                 delete[] a[i];
             }
@@ -110,7 +111,7 @@ int main() {
             return 1;
         }
         if (lo > hi) {
-            cout << "Ошибка: нижняя граница больше верхней!\n";
+            cout << "Ошибка: нижняя граница больше верхней!" << endl;
             for (int i = 0; i < n; i++) {
                 delete[] a[i];
             }
@@ -124,15 +125,15 @@ int main() {
 
     int maxVal = 0;
     if (maxplusofpdiag(a, n, maxVal))
-        cout << "Наибольший положительный элемент побочной диагонали: " << maxVal << "\n";
+        cout << "Наибольший положительный элемент побочной диагонали: " << maxVal << endl;
     else
-        cout << "На побочной диагонали нет положительных элементов.\n";
+        cout << "На побочной диагонали нет положительных элементов." << endl;
 
     int* cnt = new int[n];
     countmultof3(a, n, cnt);
     cout << "Количество кратных 3 в каждой строке: ";
     for (int i = 0; i < n; i++)
-        cout << "Строка " << i << ": " << cnt[i] << "\n";
+        cout << "Строка " << i << ": " << cnt[i] << endl;
 
     delete[] cnt;
     for (int i = 0; i < n; i++) delete[] a[i];
