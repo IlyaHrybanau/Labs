@@ -1,0 +1,198 @@
+//Одномерный массив
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+//Ввод
+int inputint(const string& prompt, int minVal, int maxVal) {
+    int value;
+    while (true) {
+        cout << prompt;
+        if (cin >> value) {
+            if (value >= minVal && value <= maxVal) return value;
+            cout << "Ошибка! Введите число от " << minVal << " до " << maxVal << "." << endl;
+        }
+        else {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Ошибка! Введите целое число." << endl;
+        }
+    }
+}
+
+//Заполнение массива 
+void fillarr(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "arr[" << i << "] = ";
+        while (!(cin >> arr[i])) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Ошибка! Введите целое число: arr[" << i << "] = ";
+        }
+    }
+}
+
+//Случайными числами
+void randarr(int arr[], int n, int minVal, int maxVal) {
+    srand(time(0));
+    for (int i = 0; i < n; i++) {
+        arr[i] = minVal + rand() % (maxVal - minVal + 1);
+    }
+}
+
+//Вывод
+void printarr(int arr[], int n) {
+    cout << "Массив: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i];
+        if (i < n - 1) cout << ", ";
+    }
+    cout << endl;
+}
+
+//Кол-во четных
+int countchet(int arr[], int n) {
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] % 2 == 0)
+            count++;
+    }
+    return count;
+}
+
+//Сумма минимального и максимального
+int summinmax(int arr[], int n) {
+    int minVal = arr[0], maxVal = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < minVal) minVal = arr[i];
+        if (arr[i] > maxVal) maxVal = arr[i];
+    }
+    cout << "Минимальный элемент: " << minVal << endl;
+    cout << "Максимальный элемент: " << maxVal << endl;
+    return minVal + maxVal;
+}
+
+void bubblesort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+//Разобрать быструю сортировку
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    return i + 1;
+}
+
+void quicksort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quicksort(arr, low, pi - 1);
+        quicksort(arr, pi + 1, high);
+    }
+}
+
+int linearsearch(int arr[], int n, int target) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == target)
+            return i;
+    }
+    return -1;
+}
+
+int interpolationsearch(int arr[], int n, int target) {
+    int low = 0, high = n - 1;
+    while (low <= high && target >= arr[low] && target <= arr[high]) {
+        if (arr[low] == arr[high]) {
+            if (arr[low] == target) return low;
+            else return -1;
+        }
+        int pos = low + (int)((double)(target - arr[low]) / (arr[high] - arr[low]) * (high - low));
+        if (arr[pos] == target) return pos;
+        if (arr[pos] < target) low = pos + 1;
+        else high = pos - 1;
+    }
+    return -1;
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    cout << "Одномерный массив" << endl << endl;
+
+    int n = inputint("Введите размер массива (1-100): ", 1, 100);
+    int arr[100];
+
+    cout << endl;
+    cout << "Способ заполнения:" << endl;
+    cout << "1-Вручную" << endl;
+    cout << "2-Случайными числами" << endl;
+    int choice = inputint("Ваш выбор: ", 1, 2);
+
+    if (choice == 1) {
+        cout << "Введите " << n << " элементов:" << endl;
+        fillarr(arr, n);
+    }
+    else {
+        int minR = inputint("Минимальное значение диапазона: ", -1000000, 1000000);
+        int maxR = inputint("Максимальное значение диапазона: ", minR, 1000000);
+        randarr(arr, n, minR, maxR);
+    }
+
+    cout << endl;
+    printarr(arr, n);
+    cout << endl << "Задания" << endl;
+    cout << "Количество чётных элементов: " << countchet(arr, n) << endl;
+    int sumMM = summinmax(arr, n);
+    cout << "Сумма min и max: " << sumMM << endl;
+
+    cout << endl << "Сортировки" << endl;
+    int arr1[100], arr2[100];
+    for (int i = 0; i < n; i++) { arr1[i] = arr[i]; arr2[i] = arr[i]; }
+
+    bubblesort(arr1, n);
+    cout << "Пузырьковая сортировка: ";
+    printarr(arr1, n);
+
+    quicksort(arr2, 0, n - 1);
+    cout << "Быстрая сортировка: ";
+    printarr(arr2, n);
+
+    cout << endl << "Поиск" << endl;
+    int target = inputint("Введите число для поиска: ", -1000000, 1000000);
+
+    int idxlin = linearsearch(arr, n, target);
+    if (idxlin != -1)
+        cout << "Последовательный поиск: найдено под индексом " << idxlin << endl;
+    else
+        cout << "Последовательный поиск: элемент не найден." << endl;
+
+    int idxinterp = interpolationsearch(arr2, n, target);
+    if (idxinterp != -1)
+        cout << "Интерполяционный поиск: найдено под индексом " << idxinterp << " (в отсортированном массиве)" << endl;
+    else
+        cout << "Интерполяционный поиск: элемент не найден." << endl;
+
+
+    return 0;
+}
