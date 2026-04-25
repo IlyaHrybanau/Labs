@@ -1,0 +1,182 @@
+//Ex 3
+#include <iostream>
+#include <string>
+#include <locale>
+using namespace std;
+
+struct student {
+    string fio;
+    int year;
+    string adres;
+    string mama;
+    string papa;
+    double ball;
+};
+
+void input(student* gr, int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Студент " << i + 1 << ":\n";
+        cout << "ФИО: ";
+        cin.ignore();
+        getline(cin, gr[i].fio);
+        cout << "Год рождения: ";
+        cin >> gr[i].year;
+        cout << "Адрес: ";
+        cin.ignore();
+        getline(cin, gr[i].adres);
+        cout << "Имя мамы: ";
+        cin >> gr[i].mama;
+        cout << "Имя папы: ";
+        cin >> gr[i].papa;
+        cout << "Средний балл: ";
+        cin >> gr[i].ball;
+        cout << endl;
+    }
+}
+
+void output(student* gr, int n) {
+    for (int i = 0; i < n; i++) {
+        cout << i + 1 << ". " << gr[i].fio
+             << " | " << gr[i].year
+             << " | " << gr[i].adres
+             << " | мама: " << gr[i].mama
+             << ", папа: " << gr[i].papa
+             << " | балл: " << gr[i].ball << endl;
+    }
+}
+
+student best(student* gr, int n) {
+    int idx = 0;
+    for (int i = 1; i < n; i++)
+        if (gr[i].ball > gr[idx].ball)
+            idx = i;
+    return gr[idx];
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    int n1, n2;
+    cout << "Количество студентов в группе 1: ";
+    cin >> n1;
+    student* g1 = new student[n1];
+    input(g1, n1);
+
+    cout << "Количество студентов в группе 2: ";
+    cin >> n2;
+    student* g2 = new student[n2];
+    input(g2, n2);
+
+    cout << "\n=== Группа 1 ===\n";
+    output(g1, n1);
+    student b1 = best(g1, n1);
+    cout << "Лучший: " << b1.fio << ", балл: " << b1.ball << endl;
+
+    cout << "\n=== Группа 2 ===\n";
+    output(g2, n2);
+    student b2 = best(g2, n2);
+    cout << "Лучший: " << b2.fio << ", балл: " << b2.ball << endl;
+
+    delete[] g1;
+    delete[] g2;
+
+    return 0;
+}
+
+//Ex 4
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <locale>
+using namespace std;
+
+int** create(int n) {
+    int** m = new int*[n];
+    for (int i = 0; i < n; i++)
+        m[i] = new int[n];
+    return m;
+}
+
+void fill_rand(int** m, int n) {
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            m[i][j] = rand() % 19 - 9;
+}
+
+void print(int** m, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++)
+            cout << m[i][j] << "\t";
+        cout << endl;
+    }
+}
+
+int** square(int** m, int n) {
+    int** res = create(n);
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++) {
+            res[i][j] = 0;
+            for (int k = 0; k < n; k++)
+                res[i][j] += m[i][k] * m[k][j];
+        }
+    return res;
+}
+
+int lastrow_sum(int** m, int n) {
+    int s = 0;
+    for (int j = 0; j < n; j++)
+        s += m[n - 1][j];
+    return s;
+}
+
+void destroy(int** m, int n) {
+    for (int i = 0; i < n; i++)
+        delete[] m[i];
+    delete[] m;
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    srand(time(0));
+
+    int n;
+    cout << "Размер матриц n: ";
+    cin >> n;
+
+    int** a = create(n); fill_rand(a, n);
+    int** b = create(n); fill_rand(b, n);
+    int** c = create(n); fill_rand(c, n);
+
+    int** a2 = square(a, n);
+    int** b2 = square(b, n);
+    int** c2 = square(c, n);
+
+    int sa = lastrow_sum(a2, n);
+    int sb = lastrow_sum(b2, n);
+    int sc = lastrow_sum(c2, n);
+
+    cout << "\nA:\n";  print(a, n);
+    cout << "A^2:\n"; print(a2, n);
+    cout << "Сумма последней строки: " << sa << endl;
+
+    cout << "\nB:\n";  print(b, n);
+    cout << "B^2:\n"; print(b2, n);
+    cout << "Сумма последней строки: " << sb << endl;
+
+    cout << "\nC:\n";  print(c, n);
+    cout << "C^2:\n"; print(c2, n);
+    cout << "Сумма последней строки: " << sc << endl;
+
+    cout << "\nМатрица с наименьшей суммой последней строки: ";
+    if (sa <= sb && sa <= sc)
+        cout << "A (сумма = " << sa << ")" << endl;
+    else if (sb <= sa && sb <= sc)
+        cout << "B (сумма = " << sb << ")" << endl;
+    else
+        cout << "C (сумма = " << sc << ")" << endl;
+
+    destroy(a, n); destroy(b, n); destroy(c, n);
+    destroy(a2, n); destroy(b2, n); destroy(c2, n);
+
+    return 0;
+}
