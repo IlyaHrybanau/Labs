@@ -1,7 +1,6 @@
 //Ex 3
 #include <iostream>
 #include <string>
-#include <locale>
 using namespace std;
 
 struct student {
@@ -87,7 +86,6 @@ int main() {
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <locale>
 using namespace std;
 
 int** create(int n) {
