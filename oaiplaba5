@@ -1,0 +1,168 @@
+//Ex1
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstring>
+using namespace std;
+
+struct tv
+{
+    char brand[50];
+    int diagonal;
+    double price;
+};
+
+void createfile()
+{
+    tv items[7];
+
+    strcpy(items[0].brand, "Samsung");
+    items[0].diagonal = 43;
+    items[0].price = 35000;
+
+    strcpy(items[1].brand, "LG");
+    items[1].diagonal = 55;
+    items[1].price = 48000;
+
+    strcpy(items[2].brand, "Samsung");
+    items[2].diagonal = 28;
+    items[2].price = 22000;
+
+    strcpy(items[3].brand, "Sony");
+    items[3].diagonal = 65;
+    items[3].price = 90000;
+
+    strcpy(items[4].brand, "Samsung");
+    items[4].diagonal = 50;
+    items[4].price = 55000;
+
+    strcpy(items[5].brand, "Philips");
+    items[5].diagonal = 40;
+    items[5].price = 30000;
+
+    strcpy(items[6].brand, "Samsung");
+    items[6].diagonal = 32;
+    items[6].price = 27000;
+
+    ofstream f("tv.bin", ios::binary);
+    f.write((char*)items, sizeof(items));
+    f.close();
+
+    cout << "Бинарный файл tv.bin создан." << endl;
+}
+
+void showfile()
+{
+    ifstream f("tv.bin", ios::binary);
+    tv item;
+    int num = 1;
+
+    cout << "\n=== Содержимое файла ===" << endl;
+    while (f.read((char*)&item, sizeof(tv)))
+    {
+        cout << num++ << ". " << item.brand << " | " << item.diagonal << " дюймов | " << item.price << " руб." << endl;
+    }
+    f.close();
+}
+
+void findsamsung()
+{
+    ifstream fin("tv.bin", ios::binary);
+    ofstream fout("result_tv.bin", ios::binary);
+    tv item;
+    int count = 0;
+
+    cout << "\n=== Samsung, более 32 дюймов ===" << endl;
+
+    while (fin.read((char*)&item, sizeof(tv)))
+    {
+        if (strcmp(item.brand, "Samsung") == 0 && item.diagonal > 32)
+        {
+            count++;
+            cout << count << ". " << item.brand << " | " << item.diagonal << " дюймов | " << item.price << " руб." << endl;
+            fout.write((char*)&item, sizeof(tv));
+        }
+    }
+
+    fin.close();
+    fout.close();
+
+    cout << "\nКоличество найденных телевизоров: " << count << endl;
+    cout << "Результат сохранён в result_tv.bin" << endl;
+}
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    createfile();
+    showfile();
+    findsamsung();
+    return 0;
+}
+
+
+//Ex2
+#include <iostream>
+#include <fstream>
+#include <locale>
+#include <cctype>
+using namespace std;
+
+void createfile()
+{
+    char symbols[] = {'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и', 'к',
+                      'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф'};
+    int size = sizeof(symbols);
+
+    ofstream f("symbols.bin", ios::binary);
+    f.write(symbols, size);
+    f.close();
+
+    cout << "Бинарный файл symbols.bin создан." << endl;
+}
+
+void showfile(const char* filename, const char* title)
+{
+    ifstream f(filename, ios::binary);
+    char ch;
+
+    cout << "\n" << title << endl;
+    while (f.read(&ch, sizeof(char)))
+        cout << ch << " ";
+    cout << endl;
+    f.close();
+}
+
+void converttoupper()
+{
+    ifstream fin("symbols.bin", ios::binary);
+    ofstream fout("symbols_upper.bin", ios::binary);
+    char ch;
+
+    while (fin.read(&ch, sizeof(char)))
+    {
+        unsigned char uch = (unsigned char)ch;
+        if (uch >= 224 && uch <= 255)
+            uch -= 32;
+        else if (uch == 184)
+            uch = 168;
+        fout.write((char*)&uch, sizeof(char));
+    }
+
+    fin.close();
+    fout.close();
+
+    cout << "\nФайл symbols_upper.bin создан." << endl;
+}
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+
+    createfile();
+    showfile("symbols.bin", "=== До изменения (строчные) ===");
+    converttoupper();
+    showfile("symbols_upper.bin", "=== После изменения (заглавные) ===");
+
+    return 0;
+}
