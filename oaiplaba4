@@ -1,0 +1,147 @@
+//Ex1
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <locale>
+using namespace std;
+
+void createfile()
+{
+    ofstream f("vladeltsy.txt");
+    f << "Иванов;Иван;Иванович;+79001112233;101000;Россия;Московская;Одинцовский;Москва;Ленина;10;5;ВАЗ;А123БВ77;ТП-001\n";
+    f << "Петров;Сергей;Алексеевич;+79002223344;220000;Беларусь;Минская;Минский;Минск;Советская;3;12;Toyota;В456ГД77;ТП-002\n";
+    f << "Сидорова;Мария;Петровна;+79003334455;630000;Россия;Новосибирская;Новосибирский;Новосибирск;Мира;7;1;ВАЗ;Е789ЖЗ54;ТП-003\n";
+    f << "Кузнецов;Дмитрий;Олегович;+79004445566;344000;Россия;Ростовская;Ростовский;Ростов;Пушкина;2;8;BMW;И012КЛ61;ТП-004\n";
+    f << "Морозова;Анна;Сергеевна;+79005556677;443000;Россия;Самарская;Самарский;Самара;Гагарина;15;3;ВАЗ;М345НО63;ТП-005\n";
+    f.close();
+    cout << "Файл vladeltsy.txt создан." << endl;
+}
+
+void showfile()
+{
+    ifstream f("vladeltsy.txt");
+    string line;
+    cout << "\n=== Содержимое файла ===" << endl;
+    while (getline(f, line))
+        cout << line << endl;
+    f.close();
+}
+
+void findvaz()
+{
+    ifstream fin("vladeltsy.txt");
+    ofstream fout("result_vaz.txt");
+    string line;
+    int count = 0;
+
+    cout << "\n=== Автомобили марки ВАЗ ===" << endl;
+    fout << "=== Автомобили марки ВАЗ ===" << endl;
+
+    while (getline(fin, line))
+    {
+        string fields[15];
+        int idx = 0, pos = 0;
+        for (int i = 0; i <= (int)line.size(); i++)
+        {
+            if (i == (int)line.size() || line[i] == ';')
+            {
+                fields[idx++] = line.substr(pos, i - pos);
+                pos = i + 1;
+            }
+        }
+
+        if (fields[12] == "ВАЗ")
+        {
+            count++;
+            cout << "ФИО: " << fields[0] << " " << fields[1] << " " << fields[2] << endl;
+            cout << "Телефон: " << fields[3] << endl;
+            cout << "Адрес: " << fields[5] << ", г." << fields[8] << ", ул." << fields[9] << ", д." << fields[10] << ", кв." << fields[11] << endl;
+            cout << "Марка: " << fields[12] << ", Номер: " << fields[13] << ", Техпаспорт: " << fields[14] << endl << endl;
+
+            fout << "ФИО: " << fields[0] << " " << fields[1] << " " << fields[2] << endl;
+            fout << "Телефон: " << fields[3] << endl;
+            fout << "Адрес: " << fields[5] << ", г." << fields[8] << ", ул." << fields[9] << ", д." << fields[10] << ", кв." << fields[11] << endl;
+            fout << "Марка: " << fields[12] << ", Номер: " << fields[13] << ", Техпаспорт: " << fields[14] << endl << endl;
+        }
+    }
+
+    cout << "Найдено: " << count << ". Результат в result_vaz.txt" << endl;
+    fin.close();
+    fout.close();
+}
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    createfile();
+    showfile();
+    findvaz();
+    return 0;
+}
+
+
+
+//Ex2
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+void createfile()
+{
+    ofstream f("chisla.txt");
+    f << "3.5 -2.1 4.0 -1.5 2.8 -0.9 5.2 -3.3 1.1 2.6";
+    f.close();
+    cout << "Файл chisla.txt создан." << endl;
+}
+
+void showfile()
+{
+    ifstream f("chisla.txt");
+    double x;
+    cout << "\n=== Содержимое файла ===" << endl;
+    while (f >> x)
+        cout << x << " ";
+    cout << endl;
+    f.close();
+}
+
+void process()
+{
+    ifstream fin("chisla.txt");
+    ofstream fout("result_chisla.txt");
+
+    double x, sum = 0.0, product = 1.0;
+    int count = 0;
+
+    while (fin >> x)
+    {
+        sum += x;
+        product *= x;
+        count++;
+    }
+    fin.close();
+
+    double abssum = fabs(sum);
+    double prodsquare = product * product;
+
+    cout << "\nКоличество чисел: " << count << endl;
+    cout << "Модуль суммы: " << abssum << endl;
+    cout << "Квадрат произведения: " << prodsquare << endl;
+
+    fout << "Количество чисел: " << count << endl;
+    fout << "Модуль суммы: " << abssum << endl;
+    fout << "Квадрат произведения: " << prodsquare << endl;
+    fout.close();
+
+    cout << "Результат сохранён в result_chisla.txt" << endl;
+}
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    createfile();
+    showfile();
+    process();
+    return 0;
+}
