@@ -1,0 +1,160 @@
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+#include <conio.h>
+#include <windows.h>
+using namespace std;
+
+
+int main() {
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	//1.массив символов mystring
+	char mystring[5];
+
+	//2.указатель на символьный массив
+	char* ptr;
+
+	// 3. Статический массив коротких целых чисел
+	short myNumbers[10];
+
+	// 4. Указатель на массив коротких целых чисел
+	short* pShort;
+
+	// 5. Указатель на двумерный массив целых чисел (3 строки, 4 столбца)
+	int (*p2D)[4];
+
+	//1punkt
+	cout << "1punkt" << endl;
+	cout << "Символьный массив до ввода " << endl;
+	for (int i = 0; i < 5; i++) {
+		cout << "myString[" << i << "] = " << mystring[i] << endl;
+	}
+	// Вывод: мусор так как массив не инциализирован
+	cout << "\n";
+
+	//2punkt
+	cout << "Введите массив" << endl;
+	for (int i = 0; i < 5; i++) {
+		cout << "arr1[" << i << "] = ";
+		cin >> mystring[i];
+	}
+	cout << "\n";
+
+	//3punkt
+	cout << "Символьный массив после ввода: " << endl;
+
+	cout << "По символам: " << endl;
+	for (int i = 0; i < 5; i++) {
+		cout << "mystring[" << i << "] = " << mystring[i] << endl;
+	}
+	//Вывод
+	cout << "\n";
+
+	//4punkt
+	//присваивание указателю птр адреса символьного массива
+	cout << "4punkt" << endl;
+	ptr = mystring;
+
+	cout << "adress massiva = " << (void*)mystring << endl;
+	cout << "adress ukazatelya = " << (void*)ptr << endl;
+	cout << "soderzhimoe ukazatelya =  " << *ptr << endl;
+	cout << "\n";
+
+
+
+	//5punkt
+	cout <<"5punkt" << endl;
+
+	cout << "Вывод строки с помощью указателя " << endl;
+	cout << "По символам: " << endl;
+	for (int i = 0; i < 5; i++) {
+		cout << "ptr[" << i << "] = " << ptr[i] << endl;
+	}
+ 
+	cout << "\n";
+
+	//6punkt
+	cout << "6punkt" << endl;
+
+	/*статический одномерный*/
+	short arrnum[5];
+	//for (int i = 0; i < 5; i++) {
+	//	arrnum[i] = i + 1;
+	//}
+
+	cout << "До ввода " << endl;
+	for (int i = 0; i < 5; i++) {
+		cout << arrnum[i] << " ";
+	}
+	cout << "\n";
+
+	cout << "Введите массив" << endl;
+	for (int i = 0; i < 5; i++) {
+		cin >> arrnum[i];
+	}
+	cout << "\n";
+
+	cout << "После ввода " << endl;
+	for (int i = 0; i < 5; i++) {
+		cout << arrnum[i] << " ";
+	}
+	cout << "\n";
+
+	//7punkt
+	cout << "7punkt" << endl;
+
+	ptr = new char[50]; 
+	cout << "До ввода " << endl;
+	for (int i = 0; i < 5; i++) {
+		cout << "ptr[" << i << "] = " << ptr[i] << endl;
+	}
+	cout << "\n";
+
+	cout << "Введите массив" << endl;
+	for (int i = 0; i < 5; i++) {
+		cout << "ptr[" << i << "] = ";
+		cin >> ptr[i];
+	}
+	cout << "\n";
+
+	cout << "soderzhimoe dyn massiva после ввода: " << endl;
+	for (int i = 0; i < 5; i++) {
+		cout << "ptr[" << i << "] = " << ptr[i] << endl;
+	}
+	cout << "\n";
+	//вывод учите английский
+
+
+
+	//8punkt
+	//// 4. Указатель на массив коротких целых чисел
+	//short* pShort;
+	cout << "8punkt" << endl;
+	delete[] ptr;
+
+	const int rows = 3, cols = 4;
+	pShort = new short[rows * cols];
+
+	//указатель на массив коротких целых чисел 
+	short* arrnum;
+
+	///*двумерный*/
+	//int arr2d[4][4];
+	int rows = 3;
+
+	//short** matrix = new short*[rows];
+
+	///*трехмерный*/
+	//int arr3d[2][2][3];
+	//int (*ptr)[2][3] = arr3d;
+
+
+	////указатель 3
+	//int(*ptr)[4] = arr2d;
+
+
+
+	return 0;
+}
