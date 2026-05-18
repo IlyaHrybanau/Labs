@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+
+void bubblesort(int* arr, int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int interpolsearch(int* arr, int n, int key) {
+    int low = 0;
+    int high = n - 1;
+
+    while (low <= high && key >= arr[low] && key <= arr[high]) {
+        if (arr[high] == arr[low]) {
+            if (arr[low] == key) return low;
+            else return -1;
+        }
+
+        int mid = low + (key - arr[low]) * (high - low) / (arr[high] - arr[low]);
+
+        if (arr[mid] == key)
+            return mid;
+        else if (arr[mid] < key)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    return -1;
+}
+
+int main() {
+    int n;
+    cout << "Размер массива: ";
+    cin >> n;
+
+    int* arr = new int[n];
+
+    cout << "Введите элементы: ";
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    bubblesort(arr, n);
+
+    cout << "Отсортированный массив: ";
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+
+    int key;
+    cout << "Введите элемент для поиска: ";
+    cin >> key;
+
+    int index = interpolsearch(arr, n, key);
+
+    if (index != -1)
+        cout << "Элемент найден, индекс: " << index << endl;
+    else
+        cout << "Элемент не найден" << endl;
+
+    delete[] arr;
+    return 0;
+}
