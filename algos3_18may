@@ -1,0 +1,157 @@
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+#include <conio.h>
+#include <windows.h>
+using namespace std;
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    // 1. массив символов mystring
+    char mystring[5];
+
+    // 2. указатель на символьный массив
+    char* ptr;
+
+    // 3. Статический массив коротких целых чисел
+    short myNumbers[10];
+
+    // 4. Указатель на массив коротких целых чисел
+    short* pShort;
+
+    // 5. Трёхмерный массив целых чисел
+    int arr3d[2][3][4];
+
+    // 6. Указатель на двумерный массив целых чисел
+    int (*p2D)[3][4];
+
+    // 1punkt
+    cout << "1punkt" << endl;
+    cout << "Символьный массив до ввода " << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << "mystring[" << i << "] = " << mystring[i] << endl;
+    }
+    cout << "\n";
+
+    // 2punkt
+    cout << "Введите массив" << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << "arr1[" << i << "] = ";
+        cin >> mystring[i];
+    }
+    cout << "\n";
+
+    // 3punkt
+    cout << "Символьный массив после ввода: " << endl;
+    cout << "По символам: " << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << "mystring[" << i << "] = " << mystring[i] << endl;
+    }
+    cout << "\n";
+
+    // 4punkt
+    cout << "4punkt" << endl;
+    ptr = mystring;
+    cout << "adress massiva = " << (void*)mystring << endl;
+    cout << "adress ukazatelya = " << (void*)ptr << endl;
+    cout << "soderzhimoe ukazatelya = " << *ptr << endl;
+    cout << "\n";
+
+    // 5punkt
+    cout << "5punkt" << endl;
+    cout << "Вывод строки с помощью указателя " << endl;
+    cout << "По символам: " << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << "ptr[" << i << "] = " << ptr[i] << endl;
+    }
+    cout << "\n";
+
+    // 6punkt
+    cout << "6punkt" << endl;
+    short arrnum[5];
+    cout << "До ввода " << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << arrnum[i] << " ";
+    }
+    cout << "\n";
+    cout << "Введите массив" << endl;
+    for (int i = 0; i < 5; i++) {
+        cin >> arrnum[i];
+    }
+    cout << "\n";
+    cout << "После ввода " << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << arrnum[i] << " ";
+    }
+    cout << "\n";
+
+    // 7punkt
+    cout << "7punkt" << endl;
+    ptr = new char[5];
+    cout << "До ввода " << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << "ptr[" << i << "] = " << ptr[i] << endl;
+    }
+    cout << "\n";
+    cout << "Введите массив" << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << "ptr[" << i << "] = ";
+        cin >> ptr[i];
+    }
+    cout << "\n";
+    cout << "soderzhimoe dyn massiva после ввода: " << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << "ptr[" << i << "] = " << ptr[i] << endl;
+    }
+    cout << "\n";
+
+    // 8punkt
+    cout << "8punkt" << endl;
+    delete[] ptr;
+
+    // создаём двумерный динамический массив через pShort (3 строки, 4 столбца)
+    const int rows = 3, cols = 4;
+    pShort = new short[rows * cols];
+
+    cout << "Введите двумерный массив " << rows << "x" << cols << ":" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << "pShort[" << i << "][" << j << "] = ";
+            cin >> pShort[i * cols + j];
+        }
+    }
+    cout << "\n";
+    cout << "Двумерный массив после ввода: " << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << "pShort[" << i << "][" << j << "] = " << pShort[i * cols + j] << endl;
+        }
+    }
+    cout << "\n";
+    delete[] pShort;
+
+    // 9punkt
+    cout << "9punkt" << endl;
+    // вывод элемента трёхмерного массива через индексацию
+    arr3d[0][1][2] = 42;
+    cout << "arr3d[0][1][2] = " << arr3d[0][1][2] << endl;
+    cout << "\n";
+
+    // 10punkt
+    cout << "10punkt" << endl;
+    // вывод того же элемента через имя массива как указатель
+    cout << "*(*(*(arr3d+0)+1)+2) = " << *(*(*(arr3d + 0) + 1) + 2) << endl;
+    cout << "\n";
+
+    // 11punkt
+    cout << "11punkt" << endl;
+    // присваиваем указателю №6 адрес трёхмерного массива
+    p2D = arr3d[0];
+    cout << "p2D[1][2] через указатель на двумерный: " << *(*(p2D + 1) + 2) << endl;
+    cout << "\n";
+
+    _getch();
+    return 0;
+}
